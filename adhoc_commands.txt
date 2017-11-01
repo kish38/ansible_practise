@@ -1,0 +1,16 @@
+
+move file from control machine to remote machine.
+ansible remote-machine -m copy -a "src=/etc/ansible/file_tobe_copied.txt dest=/tmp/file_copied.txt"
+
+Stop and start the services
+ansible remote-machine -m service -a "name=nginx state=started"
+	
+check the disk spaces.
+ansible remote-machine -a 'df -h'
+
+
+Get the defined environment variables from target host
+ansible -m setup 10.71.9.247
+
+What is the command to see Inventory Vars Defined For My Host?
+ansible -m debug -a "var=hostvars['hostname']" localhost

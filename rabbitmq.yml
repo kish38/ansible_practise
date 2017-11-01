@@ -1,0 +1,20 @@
+
+---
+- hosts: localhost
+  become: true
+  become_method: sudo
+  vars:
+    rabbitmq_version: 3.0.2-1
+
+  tasks:
+  - name: ensure python-software-properties is installed
+    apt: pkg=python-software-properties state=installed
+
+  - name: install package
+    apt: name={{ item }} update_cache=yes state=installed
+    with_items:
+      - rabbitmq-server
+
+  handlers:
+  - name: restart rabbitmq
+service: name=rabbitmq-server state=restarted
